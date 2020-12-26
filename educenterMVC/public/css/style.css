@@ -1862,3 +1862,115 @@ section#course .card-footer {
   margin-bottom: 20px;
   font-size: 15px;
 }
+
+.float-btn {
+	width: 40px;
+	height: 40px;
+	background-color:#ffbf00;
+	border-radius:50px;
+	text-align:center;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+}
+
+.float-btn i {
+  font-size: 20px;
+  color:#FFF;
+  margin-top: 11px;
+  transition: 0.3s ease-in-out;
+}
+
+.float-btn--right {
+  position: absolute;
+  bottom: 250px;
+	right: 10px;
+}
+
+.float-btn--left {
+  position: absolute;
+  bottom: 250px;
+	left: 10px;
+}
+
+.float-btn:hover i {
+  color: #333;
+  transition: 0.3s ease-in-out;
+}
+
+#instructorModalAlert {
+  visibility: hidden;
+}
+
+.user-account--menu .user-avatar {
+  width:  32px;
+  height: 32px;
+  margin-right: 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user-account--menu .user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-account--menu .user-menu {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: -240px;
+  padding: 10px 20px;
+  background: #1e1e4b;
+  width: 300px;
+  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  transition: 0.5s;
+  z-index: 100;
+}
+
+.user-account--menu .user-menu .user-info {
+  margin-bottom: 20px;
+}
+
+.user-account--menu .user-menu .user-info h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.2em;
+  padding-bottom: 10px;
+}
+
+.user-account--menu .user-menu .user-info h4 {
+  text-align: center;
+  font-size: 14px;
+  color: #cecece;
+  font-weight: 400;
+}
+
+.user-account--menu .user-menu::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 261px;
+  width: 20px;
+  height: 20px;
+  background: #1e1e4b;
+  transform: rotate(45deg);
+}
+
+.user-account--menu .user-menu .menu-items li {
+  font-size: 13px;
+  text-align: left;
+  color: white;
+  margin: 20px 0;
+  transition: 0.1s ease-in-out;
+}
+
+.user-account--menu .user-menu .menu-items li:hover {
+  color: #ffbf00;
+  transition: 0.3s ease-in-out;
+}
