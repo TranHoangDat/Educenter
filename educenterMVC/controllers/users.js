@@ -1,9 +1,12 @@
 const User = require('../models/User');
+const StudentCourse = require('../models/StudentCourse.js');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = { 
-  register : function(req, res) {
+  register : async function(req, res) {
     const { name, email, password, password2 } = req.body;
     let errors = [];
     
@@ -25,10 +28,11 @@ module.exports = {
         name,
         email,
         password,
-        password2
+        password2,
+        layout: 'usersLayout'
       });
     } else {
-        User.findOne({ email: email }).then(user => {
+        User.findOne({ email: email, role: 'student' }).then(user => {
         if (user) {
           errors.push({ msg: 'Email already exists' });
           res.render('register', {
@@ -36,13 +40,15 @@ module.exports = {
             name,
             email,
             password,
-            password2
+            password2,
+            layout: 'usersLayout'
           });
         } else {
           const newUser = new User({
             name,
             email,
-            password
+            password,
+            role: 'student'
           });
     
           bcrypt.genSalt(10, (err, salt) => {
@@ -51,11 +57,30 @@ module.exports = {
               newUser.password = hash;
               newUser.save()
               .then(user => {
-                req.flash(
-                'success_msg',
-                'You are now registered and can log in'
-                );
-                res.redirect('/users/login');
+                jwt.sign({
+                  id: newUser._id
+                }, 
+                process.env.EMAIL_SECRET,
+                {
+                  expiresIn: '1d'
+                }, 
+                (err, emailToken) => {
+                  const url = `http://localhost:5000/users/confirmation/${emailToken}`;
+                  req.transporter.sendMail({
+                    from: "Educenter",
+                    to: newUser.email,
+                    subject: 'Educenter Confimation Email',
+                    html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
+                  })
+                },
+              );
+                // req.flash(
+                //   'success_msg',
+                //   'You are now registered and can log in'
+                // );
+                // res.redirect('/users/login');
+                req.session.user = { id: newUser._id, name: newUser.name, email: newUser.email, role: newUser.role, confirmed: user.confirmed };
+                res.redirect('/');
               })
               .catch(err => console.log(err));
             });
@@ -64,16 +89,72 @@ module.exports = {
       });
     }  
   },
+  confirmation: async function(req, res) {
+    try {
+      const tokenInfo = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
+      await User.updateOne(
+        { _id: tokenInfo.id },
+        { $set: { confirmed: true } }
+      );
+      const newStudentCourse = new StudentCourse({
+        idStudent: tokenInfo.id,
+        idWishlist: [],
+        idLearning: []
+      });
+      newStudentCourse.save();
+      return res.redirect('/');
+    } catch (e) {
+      req.flash('error', 'Sorry, your token expired!');
+      res.render('confirm', { layout: 'usersLayout', title: 'Educenter Confirm' });
+    }
+  },
+  confirm: async function(req, res) {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        req.flash('error', 'Email is not registered');
+        return res.redirect('/users/confirm');
+      }
+      jwt.sign({
+        id: user._id
+      }, 
+      process.env.EMAIL_SECRET,
+      {
+        expiresIn: '1d'
+      }, 
+      (err, emailToken) => {
+        const url = `http://localhost:5000/users/confirmation/${emailToken}`;
+        req.transporter.sendMail({
+          from: "Educenter",
+          to: newUser.email,
+          subject: 'Educenter Confimation Email',
+          html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
+        })
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  },
   login: function(req, res, next) {
-    passport.authenticate('local', {
-      successRedirect: '/dashboard',
-      failureRedirect: '/users/login',
-      failureFlash: true
+    passport.authenticate('local', function(err, user, info) {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          req.flash('error', 'Invalid email or password');
+          return res.redirect('/users/login');
+        }
+        req.logIn(user, function(err) {
+          if (err) {
+              return next(err);
+          }
+          req.session.user = { id: user._id, name: user.name, email: user.email, role: user.role, confirmed: user.confirmed };
+          return res.redirect('/');
+        });
     })(req, res, next);
   },
   logout: function(req, res) {
     req.logout();
-    req.flash('success_msg', 'You are logged out');
-    res.redirect('/users/login');
+    res.redirect('/');
   }
 }

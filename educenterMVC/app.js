@@ -1,4 +1,5 @@
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
@@ -21,6 +22,7 @@ mongoose.connect(
   .catch(err => console.log(err));
 
 // EJS
+app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 // Express body parser
@@ -53,7 +55,14 @@ app.use(express.static(__dirname + '/public'));
 
 // Routes
 app.use('/', require('./routes/index.js'));
-app.use('/users', require('./routes/users'));
+app.use('/about', require('./routes/about.js'));
+app.use('/courses', require('./routes/courses.js'));
+app.use('/events', require('./routes/events.js'));
+app.use('/blog', require('./routes/blog.js'));
+app.use('/users', require('./routes/users.js'));
+app.use('/instructors', require('./routes/instructors.js'));
+app.use('/user', require('./routes/user.js'));
+app.use('/home', require('./routes/home.js'));
 
 const PORT = process.env.PORT || 5000;
 

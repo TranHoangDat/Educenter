@@ -1,15 +1,23 @@
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() && (req.user.confirmed)) {
       return next();
     }
-    req.flash('error_msg', 'Please log in to view that resource');
-    res.redirect('/users/login');
-  },
-  forwardAuthenticated: function(req, res, next) {
+
     if (!req.isAuthenticated()) {
-      return next();
+      req.flash('error_msg', 'Please log in to view that resource');
+      res.redirect('/users/login');
+    } 
+    
+    if (!req.user.confirmed) {
+      req.flash('error_msg', 'Please confirm your email to view that resource');
+      res.redirect('/users/confirm');
     }
-    res.redirect('/dashboard');      
-  }
+  },
+  // forwardAuthenticated: function(req, res, next) {
+  //   if (!req.isAuthenticated()) {
+  //     return next();
+  //   }
+  //   res.redirect('/dashboard');      
+  // }
 };
