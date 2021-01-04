@@ -5,69 +5,93 @@ module.exports = {
     editEmail: async function(req, res) {
         const oldEmail = req.body.oldEmail;
         const password = req.body.password;
-        const user = await User.findOne({ email: oldEmail });
+        let user = null;
+        let isValidPassword = null;
 
-        if (!user.confirmed) {
-            // return
+        try {   
+            user = await User.findOne({ email: oldEmail });
+            isValidPassword = await bcrypt.compare(password, user.password);
+        } catch(error) {
+            return res.send({ result: 'failure', msg: 'Error occurred during processing!' }); 
         }
-
-        const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword) {
-            req.flash('error', 'Wrong Password!');
-            return res.render('/user/edit-account'); 
+            return res.send({ result: 'failure', msg: 'Wrong password!' }); 
         }
 
-        const newEmail = req.body.newEmail; 
-        await User.updateOne(
-            { _id: user._id },
-            { $set: { email: newEmail } }
-        );
-        req.flash(
-            'success_msg',
-            'You changes has been successfully saved'
-        );
-        req.session.user = { id: user._id, name: user.name, email: user.newEmail, role: user.role, confirmed: user.confirmed };
-        return res.render('/user/edit-account');
+        const newEmail = req.body.newEmail;
+        let isEmailExisted = null;
+
+        try {
+            isEmailExisted = await User.findOne({ email: newEmail });
+        } catch(error) {
+            return res.send({ result: 'failure', msg: 'Error occurred during processing!' }); 
+        }
+        
+        if (isEmailExisted) {
+            return res.send({ result: 'failure', msg: 'This email address is already registered!' }); 
+        }
+        
+        try {
+            await User.updateOne(
+                { _id: user._id },
+                { $set: { email: newEmail } }
+            );
+        } catch (error) {
+            return res.send({ result: 'failure', msg: 'Error occurred during processing!' }); 
+        }
+        
+        req.user.email = newEmail;
+        return res.send({ result: 'success', msg: 'Your email address has been successfully changed!' });
     },
     editName: async function(req, res) {
         const email = req.body.email;
-        const password = req.body.password;
-        const user = User.findOne({ email: email });
-        const isValidPassword = await bcrypt.compare(password, user.password);
-        if (!isValidPassword) {
-            req.flash('error', 'Wrong Password!');
-            return res.render('/user/edit-account'); 
+        const newName = req.body.newName;
+
+        try {
+            await User.updateOne(
+                { email: email },
+                { $set: { name: newName } }
+            );
+        } catch {
+            return res.send({ result: 'failure', msg: 'Error occurred during processing!' }); 
         }
-        const newName = req.body.newName; 
-        await User.updateOne(
-            { _id: user._id },
-            { $set: { name: newName } }
-        );
-        req.flash(
-            'success_msg',
-            'You changes has been successfully saved'
-        );
-        return res.render('/user/edit-account');
+
+        req.user.name = newName;
+        return res.send({ result: 'success', msg: 'Your name has been successfully changed!' });
     },
     editPassword: async function(req, res) {
         const email = req.body.email;
         const oldPassword = req.body.oldPassword;
-        const user = User.findOne({ email: email });
-        const isValidPassword = await bcrypt.compare(oldPassword, user.password);
-        if (!isValidPassword) {
-            req.flash('error', 'Wrong Old Password!');
-            return res.render('/user/edit-account'); 
+        let user = null;
+        let isValidPassword = null;
+
+        try {
+            user = await User.findOne({ email: email });
+            isValidPassword = await bcrypt.compare(oldPassword, user.password);
+        } catch(error) {
+            return res.send({ result: 'failure', msg: 'Error occurred during processing!' }); 
         }
+        
+        if (!isValidPassword) {
+            return res.send({ result: 'failure', msg: 'Wrong password!' }); 
+        }
+
         const newPassword = req.body.newPassword; 
-        await User.updateOne(
-            { _id: user._id },
-            { $set: { password: newPassword } }
-        );
-        req.flash(
-            'success_msg',
-            'You changes has been successfully saved'
-        );
-        return res.render('/user/edit-account');
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newPassword, salt, async (err, hashPassword) => {
+              if (err) return res.status(406).send('failure');
+              try {
+                await User.updateOne(
+                    { _id: user._id },
+                    { $set: { password: hashPassword } }
+                );
+              } catch(error) {
+                return res.send({ result: 'failure', msg: 'Error occurred during processing!' }); 
+              }
+            })
+        });
+
+        return res.send({ result: 'success', msg: 'Your password has been successfully changed!' });
     }
 }

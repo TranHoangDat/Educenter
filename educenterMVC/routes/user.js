@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.js');
-const { ensureAuthenticated } = require('../config/auth.js');
-// Edit account
-// router.get('/edit-account', ensureAuthenticated, (req, res) =>  res.render('userEditAccount'));
+
+router.get('/edit-account', function(req, res) {
+    res.render('userAccount', {
+        user: req.user,
+        page: ''
+    });
+});
+
+// Edit profile
 router.post('/edit-account/email', userController.editEmail);
 router.post('/edit-account/name', userController.editName);
 router.post('/edit-account/password', userController.editPassword);

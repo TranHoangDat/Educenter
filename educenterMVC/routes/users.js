@@ -16,23 +16,21 @@ let transporter = nodemailer.createTransport({
 });
 
 // Login Page
-router.get('/login', (req, res) => res.render('login', { layout: 'usersLayout', title: 'Educenter Login' }));
+router.get('/login', (req, res) => res.render('login', { layout: 'layouts/usersLayout', title: 'Educenter Login' }));
 
 // Register Page
-router.get('/register', (req, res) => res.render('register', { title: 'Educenter Register', layout: 'usersLayout' }));
+router.get('/register', (req, res) => res.render('register', { title: 'Educenter Register', layout: 'layouts/usersLayout' }));
 
 // Register
 router.post('/register', (req, res, next) => { req.transporter = transporter; next(); },usersController.register);
 
 // Confirmation
-router.get('/confirm', (req, res) => res.render('confirm', { layout: 'usersLayout' }));
+router.get('/confirm', (req, res) => res.render('confirm', { layout: 'layouts/usersLayout', title: 'Educenter Confirm' }));
 router.post('/confirm', (req, res, next) => { req.transporter = transporter; next(); }, usersController.confirm);
 router.get('/confirmation/:token', usersController.confirmation);
 
 // Login
 router.post('/login', usersController.login);
-
-
 
 // Logout
 router.get('/logout', usersController.logout);

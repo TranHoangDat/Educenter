@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 module.exports = { 
   register : function(req, res) {
@@ -23,7 +24,7 @@ module.exports = {
         errors,
       });
     } else {
-        User.findOne({ email: email, role: 'instructor' }).then(user => {
+        User.findOne({ email: email }).then(user => {
         if (user) {
           errors.push({ msg: 'Email already exists' });
           res.send({
@@ -60,13 +61,11 @@ module.exports = {
                   })
                 },
               );
-                // req.flash(
-                //   'success_msg',
-                //   'You are now registered and can log in'
-                // );
-                // res.redirect('/users/login');
-                req.session.user = { id: newUser._id, name: newUser.name, email: newUser.email };
-                res.redirect('/');
+                req.flash(
+                  'success_msg',
+                  'You are now registered and can log in'
+                );
+                res.redirect('/users/login');
               })
               .catch(err => console.log(err));
             });

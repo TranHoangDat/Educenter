@@ -17,16 +17,7 @@
                 placeholder="Search..."
                 aria-label="Search within site content">
             </form>
-            <ul class="list-inline">
-              <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 mx-3 d-inline-block"><i class="fas fa-shopping-cart"></i></a></li>
-              <% if (!user) { %>
-                <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="/users/login">login</a></li>
-                <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="/users/register">register</a></li>
-              <% } %>
-            </ul>
-            <% if (user) { %>
-              <%- include('./userMenu', {user:user}); %>
-            <% } %>
+            <%- include('./userMenu', {user:user}); %>
           </div>
         </div>
       </div>
@@ -40,52 +31,24 @@
             aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-  
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto text-center">
-              <% if (page == 'Home') { %>
+              <% if (page == 'All courses') { %>
                 <li class="nav-item active">
-                  <a class="nav-link" href="/">Home</a>
+                  <a class="nav-link" href="/my-courses/learning">All courses</a>
                 </li>
               <% } else { %>
                 <li class="nav-item">
-                  <a class="nav-link" href="/">Home</a>
+                  <a class="nav-link" href="/my-courses/learning">All courses</a>
                 </li>
               <% } %>
-              <% if (page == 'About') { %>
+              <% if (page == 'Wishlist') { %>
                 <li class="nav-item active">
-                  <a class="nav-link" href="/about">About</a>
+                  <a class="nav-link" href="/my-courses/wishlist">Wishlist</a>
                 </li>
               <% } else { %>
                 <li class="nav-item">
-                  <a class="nav-link" href="/about">About</a>
-                </li>
-              <% } %>
-              <% if (page == 'Courses') { %>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/courses">Courses</a>
-                </li>
-              <% } else { %>
-                <li class="nav-item">
-                  <a class="nav-link" href="/courses">Courses</a>
-                </li>
-              <% } %>
-              <% if (page == 'Events') { %>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/events">Events</a>
-                </li>
-              <% } else { %>
-                <li class="nav-item">
-                  <a class="nav-link" href="/events">Events</a>
-                </li>
-              <% } %>
-              <% if (page == 'Blog') { %>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/blog">Blog</a>
-                </li>
-              <% } else { %>
-                <li class="nav-item">
-                  <a class="nav-link" href="/blog">Blog</a>
+                  <a class="nav-link" href="/my-courses/wishlist">Wishlist</a>
                 </li>
               <% } %>
             </ul>
@@ -94,4 +57,5 @@
       </div>
     </div>
   </header>
-  <!-- /header -->
+</div> 
+<!-- /header -->

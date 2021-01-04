@@ -29,10 +29,10 @@ module.exports = {
         email,
         password,
         password2,
-        layout: 'usersLayout'
+        layout: 'layouts/usersLayout'
       });
     } else {
-        User.findOne({ email: email, role: 'student' }).then(user => {
+        User.findOne({ email: email }).then(user => {
         if (user) {
           errors.push({ msg: 'Email already exists' });
           res.render('register', {
@@ -41,7 +41,7 @@ module.exports = {
             email,
             password,
             password2,
-            layout: 'usersLayout'
+            layout: 'layouts/usersLayout'
           });
         } else {
           const newUser = new User({
@@ -74,13 +74,11 @@ module.exports = {
                   })
                 },
               );
-                // req.flash(
-                //   'success_msg',
-                //   'You are now registered and can log in'
-                // );
-                // res.redirect('/users/login');
-                req.session.user = { id: newUser._id, name: newUser.name, email: newUser.email, role: newUser.role, confirmed: user.confirmed };
-                res.redirect('/');
+                req.flash(
+                  'success_msg',
+                  'You are now registered and can log in'
+                );
+                res.redirect('/users/login');
               })
               .catch(err => console.log(err));
             });
@@ -105,7 +103,7 @@ module.exports = {
       return res.redirect('/');
     } catch (e) {
       req.flash('error', 'Sorry, your token expired!');
-      res.render('confirm', { layout: 'usersLayout', title: 'Educenter Confirm' });
+      res.render('confirm', { layout: 'layouts/usersLayout', title: 'Educenter Confirm' });
     }
   },
   confirm: async function(req, res) {
@@ -155,6 +153,9 @@ module.exports = {
   },
   logout: function(req, res) {
     req.logout();
-    res.redirect('/');
+    req.session.destroy((err) => {
+      res.clearCookie('connect.sid');
+      res.redirect('/');
+    });
   }
 }
