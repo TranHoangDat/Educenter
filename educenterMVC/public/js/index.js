@@ -9,8 +9,12 @@ $('#instructorRegisterBtn').click(function(e) {
     }).done(function(data) {
         if (data.errors.length) {
             $("#instructorModalAlert").empty();
-            $("#instructorModalAlert").addClass("alert alert-warning alert-dismissible fade show");
-            $("#instructorModalAlert").css({"height": "45px", "visibility": "visible"});
+
+            if (!($("#instructorModalAlert").hasClass('alert'))) {
+                $("#instructorModalAlert").addClass("alert alert-danger alert-dismissible fade show text-center");
+                $("#instructorModalAlert").css({"height": "45px", "visibility": "visible"});
+            }
+
             $("#instructorModalAlert").prepend(data.errors[0].msg);
         }
     })

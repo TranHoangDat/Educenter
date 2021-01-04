@@ -1051,52 +1051,56 @@ section#course {
   font-size: 11px;
 }
 
+section#course {
+  font-size: 11px;
+}
+
 section#course .card {
   cursor: pointer;
 }
 
-section#course .card-rating {
+section#course .course-rating {
   display: grid;
   grid-template-columns: 17% 42% 41%;
   justify-content: center;
   align-items: center;
 }
 
-section#course .card-rating .rating-point {
+section#course .course-rating .rating-point {
   color: #ff8000;
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 0;
 }
 
-section#course .card-rating .rating-star {
+section#course .course-rating .rating-star {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-section#course .card-rating .rating-star svg {
+section#course .course-rating .rating-star svg {
   width: 20px;
   height: 20px;
 }
 
-section#course .card-rating .rating-star svg path {
+section#course .course-rating .rating-star svg path {
   fill: #e67300;
   
 }
 
-section#course .card-rating .rating-user {
+section#course .course-rating .rating-user {
   font-size: 14px;
   align-self: center;
   justify-self: center;
 }
 
-section#course .card-pricing {
+section#course .course-pricing {
   font-size: 15px;
   font-weight: bold;
 }
 
-section#course .card-pricing .original-price {
+section#course .course-pricing .original-price {
   display: inline-block;
   font-weight: initial;
   text-decoration: line-through;
@@ -1920,10 +1924,10 @@ section#course .card-footer {
   display: none;
   position: absolute;
   top: 45px;
-  right: -240px;
+  right: -279px;
   padding: 10px 20px;
   background: #1e1e4b;
-  width: 300px;
+  width: 350px;
   box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   transition: 0.5s;
@@ -1955,7 +1959,7 @@ section#course .card-footer {
   content: '';
   position: absolute;
   top: -5px;
-  right: 261px;
+  right: 300px;
   width: 20px;
   height: 20px;
   background: #1e1e4b;
@@ -1973,4 +1977,8 @@ section#course .card-footer {
 .user-account--menu .user-menu .menu-items li:hover {
   color: #ffbf00;
   transition: 0.3s ease-in-out;
+}
+
+#editSectionAlert {
+  visibility: hidden;
 }
