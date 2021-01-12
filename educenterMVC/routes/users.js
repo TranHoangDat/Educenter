@@ -1,19 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const nodemailer = require('nodemailer');
+const mailer = require('../config/mailer.js');
 const usersController = require('../controllers/users.js');
-require('dotenv').config();
-
-// create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.GMAIL_USER, 
-      pass: process.env.GMAIL_PASS
-    },
-});
 
 // Login Page
 router.get('/login', (req, res) => res.render('login', { layout: 'layouts/usersLayout', title: 'Educenter Login' }));
@@ -22,11 +10,11 @@ router.get('/login', (req, res) => res.render('login', { layout: 'layouts/usersL
 router.get('/register', (req, res) => res.render('register', { title: 'Educenter Register', layout: 'layouts/usersLayout' }));
 
 // Register
-router.post('/register', (req, res, next) => { req.transporter = transporter; next(); },usersController.register);
+router.post('/register', (req, res, next) => { req.transporter = mailer.transporter; return next(); }, usersController.register);
 
 // Confirmation
 router.get('/confirm', (req, res) => res.render('confirm', { layout: 'layouts/usersLayout', title: 'Educenter Confirm' }));
-router.post('/confirm', (req, res, next) => { req.transporter = transporter; next(); }, usersController.confirm);
+router.post('/confirm', (req, res, next) => { req.transporter = mailer.transporter; return next(); }, usersController.confirm);
 router.get('/confirmation/:token', usersController.confirmation);
 
 // Login

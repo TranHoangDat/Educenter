@@ -1,0 +1,41 @@
+.btn-circle {
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    padding: 0;
+    border-radius: 50% !important;
+    margin: 0px 20px;
+}
+
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0px;
+}
+
+.plan-header img {
+    width: 100%;
+}
+
+.plan-buttons .btn {
+    border-radius: 5px !important;
+}
+
+.plan-buttons .btn#btn-buy-now {
+    background-color: white !important;
+    border: solid 1px #333;
+    color: #333 !important;
+}
+
+.plan-desc .plan-original-price {
+    align-self: center;
+    font-size: 20px;
+    padding: 0px;
+    text-decoration: line-through;
+}
+
+.plan-desc .plan-sale-off {
+    align-self: center;
+    font-size: 20px;
+    padding: 0px 10px;
+}

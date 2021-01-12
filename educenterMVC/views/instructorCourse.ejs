@@ -1,0 +1,83 @@
+<div class="container my-5">
+    <div class="row px-3">
+        <input class="form-control col-3" type="text" placeholder="Search" aria-label="Search">
+        <div class="btn-group col-3">
+            <button type="button" class="btn btn-primary dropdown-toggle" style="font-weight: bold;" data-toggle="dropdown-menu" aria-haspopup="true" aria-expanded="false">
+              Newest
+            </button>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn" style="background-color: #ff3333; color: white; font-weight: bold; position: absolute; top: 0; right: 0;" data-toggle="modal" data-target="#newCourseModal">
+              New Course
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- New Course Modal -->
+<div class="modal" id="newCourseModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title">New Course</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div id="newCourseModalAlert" class="" role="alert">
+          </div>
+          <form id="newCourseForm">
+            <div class="form-group">
+              <label for="courseTitle">Title</label>
+              <input
+                type="text"
+                id="courseTitle"
+                name="courseTitle"
+                class="form-control"
+                placeholder="Enter Course's Title"
+                value="<%= typeof name != 'undefined' ? name : '' %>"
+                style="height: 45px; margin-bottom: 15px;"
+              />
+              <label for="courseCategory" style="display: inline-block;">Category</label>
+              <select id="courseCategory" name="courseCategory" class="form-control w-50" style="height: 45px;">
+                <option>-- Select a Category --</option>
+                <option>Web Development</option>
+                <option>Mobile Development</option>
+              </select>
+            </div>
+            <button id="newCourseBtn" type="submit" class="btn btn-primary btn-block" style="width: 10%;">
+              Next
+            </button>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- /New Course Modal -->
+
+<div id="list-courses" class="container my-5">
+  <% courses.map(course => { %>
+    <div class="card mb-3 course" id="<%= course._id %>">
+      <div class="row no-gutters h-100">
+        <div class="col-md-2">
+          <img src="/images/course_placeholder.png" class="card-img w-100 h-100" alt="course-image">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title"><%= course.title %></h5>
+            <p class="card-text"><%= course.status %></p>
+          </div>
+          <div class="on-hover text-center py-4">
+            Edit / manage course
+          </div>
+        </div>
+      </div>
+    </div>
+  <% }); %>
+</div>
+
+<script type="text/javascript">
+  var get_courses = <%- JSON.stringify(courses) %>
+</script>
+

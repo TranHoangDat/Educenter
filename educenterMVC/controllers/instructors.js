@@ -61,11 +61,9 @@ module.exports = {
                   })
                 },
               );
-                req.flash(
-                  'success_msg',
-                  'You are now registered and can log in'
-                );
-                res.redirect('/users/login');
+                res.send({
+                  errors,
+                });
               })
               .catch(err => console.log(err));
             });

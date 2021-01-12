@@ -1,3 +1,20 @@
+function showRegisterModalMsg(type, msg) {
+    $("#instructorModalAlert").empty();
+    $("#instructorModalAlert").removeClass();
+
+    switch (type) {
+        case 'success':
+            $("#instructorModalAlert").addClass("alert alert-success alert-dismissible fade show");
+            break;
+        case 'error':
+            $("#instructorModalAlert").addClass("alert alert-danger alert-dismissible fade show");
+            break;
+    }
+
+    $("#instructorModalAlert").css({"height": "45px", "visibility": "visible"});
+    $("#instructorModalAlert").prepend(msg);
+}
+
 $('#instructorRegisterBtn').click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -8,14 +25,12 @@ $('#instructorRegisterBtn').click(function(e) {
         encode: true
     }).done(function(data) {
         if (data.errors.length) {
-            $("#instructorModalAlert").empty();
-
-            if (!($("#instructorModalAlert").hasClass('alert'))) {
-                $("#instructorModalAlert").addClass("alert alert-danger alert-dismissible fade show text-center");
-                $("#instructorModalAlert").css({"height": "45px", "visibility": "visible"});
-            }
-
-            $("#instructorModalAlert").prepend(data.errors[0].msg);
+            showRegisterModalMsg('error', data.errors[0].msg);
+        } else {
+            showRegisterModalMsg('success', 'You are now registered and can log in');
+            window.setTimeout(function(){
+                window.location.href = "http://localhost:5000/users/login";
+            }, 3000);
         }
-    })
+    });
 });

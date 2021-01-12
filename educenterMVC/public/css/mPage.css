@@ -1,0 +1,135 @@
+body {
+    background-color: #f2f3f5;
+    position: relative;
+}
+
+nav {
+    background-color: #ffbf00;
+}
+
+nav a {
+    font-size: 18px; 
+    font-weight: bold;
+}
+
+nav a i {
+    margin-right: 15px;
+}
+
+#btnSave {
+    background-color: rgba(255, 255, 255, 0.5); 
+    font-weight: bold; 
+    color: #333;
+    cursor: not-allowed;
+}
+
+main .menu {
+    position: absolute;
+    top: 170px; 
+    left: 300px;
+    width: 250px;
+}
+
+main .menu .menu-section {
+    width: 100%;
+}
+
+main .menu .menu-section .section-title {
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 20px;
+    margin-top: 25px;
+}
+
+main .menu .menu-section .section-selections {
+    width: 100%;
+}
+
+main .menu .menu-section .section-selections .radio-container {
+    display: inline-block;
+    position: relative;
+    height: 35px;
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+    padding-left: 50px;
+    padding-top: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+main .menu .menu-section .section-selections .radio-container:hover {
+    background-color: #d9d9d9;
+}
+
+main .menu .menu-section .section-selections .radio-container.clicked {
+    border-left: 6px solid #ffc61a;
+    padding-left: 44px;
+}
+
+main .menu .menu-section .section-selections .radio-container input {
+    display: none;
+}
+
+main .menu .menu-section .section-selections .radio-container .circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    position: absolute;
+    left: 20px;
+    top: 7px;
+    border-radius: 50%;
+}
+
+main .menu .menu-section .section-selections .radio-container .circle.clicked {
+    left: 14px;
+}
+
+main .menu .menu-section .section-selections .radio-container input.checked + .circle {
+    background-color: #2196fc;
+}
+
+main .menu .menu-section .section-selections .radio-container input.checked + .circle::after {
+    content: '';
+    height: 10px;
+    width: 10px;
+    background-color: white;
+    position: absolute;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+main .menu #btnSubmit {
+    margin: 15px 10px;
+    font-size: 18px;
+    background-color: #ffbf00;
+    font-weight: bold;
+    height: 70px;
+}
+
+main .main-content {
+    position: absolute;
+    top: 110px; 
+    left: 600px;
+    width: 57%;
+    background-color: white;
+    box-shadow: 0 0 10px #a6a6a6;
+}
+
+main .main-content .title {
+    margin: 40px;
+    margin-bottom: 30px;
+}
+
+main .main-content .title p {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+main .main-content .content {
+    margin-top: 40px;
+}

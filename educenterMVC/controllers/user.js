@@ -1,5 +1,8 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 
 module.exports = { 
     editEmail: async function(req, res) {
@@ -35,14 +38,33 @@ module.exports = {
         try {
             await User.updateOne(
                 { _id: user._id },
-                { $set: { email: newEmail } }
+                { $set: { email: newEmail, confirmed: false } }
             );
         } catch (error) {
             return res.send({ result: 'failure', msg: 'Error occurred during processing!' }); 
         }
-        
+
+        jwt.sign({
+            id: req.user._id
+          }, 
+          process.env.EMAIL_SECRET,
+          {
+            expiresIn: '1d'
+          }, 
+          (err, emailToken) => {
+            console.log(emailToken);
+            const url = `http://localhost:5000/users/confirmation/${emailToken}`;
+            req.transporter.sendMail({
+              from: "Educenter",
+              to: newUser.email,
+              subject: 'Educenter Confimation Email',
+              html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
+            });
+          },
+        );
+
         req.user.email = newEmail;
-        return res.send({ result: 'success', msg: 'Your email address has been successfully changed!' });
+        return res.send({ result: 'success', msg: 'Your email address has been successfully changed! Please confirm your new email !' });
     },
     editName: async function(req, res) {
         const email = req.body.email;
