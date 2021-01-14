@@ -1,3 +1,20 @@
+$(document).ready(function() {
+    let ratingPoint = null;
+
+    courses.map(course => {
+        ratingPoint = course.rating / course.voters;
+        $(`#${course.idCourse}`).find('.rating-point').append(ratingPoint.toFixed(2));
+        if (course.buyersPerWeek > 1000) {
+            $(`#${course.idCourse}`).append("<div class='card-footer mt-2'>Bestseller</div>");
+        }
+        $(`#${course.idCourse}`).click(function(e) {
+            e.preventDefault();
+            window.location.href = `http://localhost:5000/course/${course.idCourse}`;
+        });
+    });
+
+});
+
 function showRegisterModalMsg(type, msg) {
     $("#instructorModalAlert").empty();
     $("#instructorModalAlert").removeClass();

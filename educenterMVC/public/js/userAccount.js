@@ -60,7 +60,7 @@ $('#btn-edit-name').on('click', function(e) {
 
     const userEmail = $('#user-email').text();
     $.ajax({
-        url: 'http://localhost:5000/user/edit-account/name',
+        url: '/user/edit-account/name',
         data: { newName, email: userEmail },
         type: 'POST',
         async: false,
@@ -101,7 +101,7 @@ $('#btn-edit-email').on('click', function(e) {
     }
 
     $.ajax({
-        url: 'http://localhost:5000/user/edit-account/email',
+        url: '/user/edit-account/email',
         data: {
             oldEmail: currentEmail,
             newEmail,
@@ -148,7 +148,7 @@ $('#btn-edit-password').on('click', function(e) {
 
     const userEmail = $('#user-email').text();
     $.ajax({
-        url: 'http://localhost:5000/user/edit-account/password',
+        url: '/user/edit-account/password',
         data: { 
             email: userEmail,
             oldPassword: currentPassword,

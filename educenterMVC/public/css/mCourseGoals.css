@@ -1,0 +1,13 @@
+#course-goals {
+    width: 93%;
+    font-size: 17px;
+}
+
+#course-goals form {
+    margin-bottom: 50px;
+}
+
+#course-goals .form-control {
+    width: 92%;
+    height: 45px;
+}

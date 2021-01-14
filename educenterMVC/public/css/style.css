@@ -1872,7 +1872,7 @@ section#course .card-footer {
 	height: 40px;
 	background-color:#ffbf00;
 	border-radius:50px;
-	text-align:center;
+	text-align: center;
   box-shadow: 2px 2px 3px #999;
   z-index: 100;
 }
@@ -1886,13 +1886,13 @@ section#course .card-footer {
 
 .float-btn--right {
   position: absolute;
-  bottom: 250px;
+  bottom: 290px;
 	right: 10px;
 }
 
 .float-btn--left {
   position: absolute;
-  bottom: 250px;
+  bottom: 290px;
 	left: 10px;
 }
 

@@ -1,0 +1,31 @@
+#course-basics {
+    width: 92%;
+}
+
+#course-basics label {
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#course-basics input {
+    font-size: 18px;
+    height: 45px;
+}
+
+#course-basics #course-instructors .instructors .instructor {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#course-basics #course-instructors .instructors .instructor img {
+    margin-right: 15px;
+}
+
+#title-characters {
+    font-weight: bold;
+}
+
+#subtitle-characters {
+    font-weight: bold;
+}

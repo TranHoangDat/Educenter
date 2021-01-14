@@ -7,6 +7,15 @@ nav {
     background-color: #ffbf00;
 }
 
+a {
+    color: #212529;
+}
+
+a:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
 nav a {
     font-size: 18px; 
     font-weight: bold;
@@ -25,8 +34,8 @@ nav a i {
 
 main .menu {
     position: absolute;
-    top: 170px; 
-    left: 300px;
+    top: 150px; 
+    left: 280px;
     width: 250px;
 }
 
@@ -114,7 +123,7 @@ main .menu #btnSubmit {
 main .main-content {
     position: absolute;
     top: 110px; 
-    left: 600px;
+    left: 580px;
     width: 57%;
     background-color: white;
     box-shadow: 0 0 10px #a6a6a6;

@@ -189,7 +189,6 @@ $(document).ready(function() {
         $('#config-trigger').click();
     });
     
-    
     $('#color-options a').on('click', function(e) { 
         var $styleSheet = $(this).attr('data-style');
         
@@ -204,5 +203,6 @@ $(document).ready(function() {
 		
 	});
 
-
+	let ratingPoint = course.rating / course.voters;
+	$('#rating').append(`${ratingPoint.toFixed(2)} (${course.voters})`);
 });
