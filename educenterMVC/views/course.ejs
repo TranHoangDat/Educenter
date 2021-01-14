@@ -4,9 +4,9 @@
         </div><!--//hero-mask-->
         <div class="container course-container py-5">
             <div class="mx-auto">
-                <div class="hero-heading pt-3 mb-3">The Ultimate Digital Painting Course - Beginner to Advanced</div>
+                <div class="hero-heading pt-3 mb-3"><%= course.title %></div>
                 <h1 class="hero-heading mb-5">
-                    <span class="hero-heading-upper desc d-block px-1">Everything from drawing fundamentals to professional painting techniques</span>
+                    <span class="hero-heading-upper desc d-block px-1"><%= course.subTitle %></span>
                 </h1>
                 <div class="text-center mb-5">
                     <a href="/" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Back To Home"><i class="fas fa-home"></i></a>
@@ -18,18 +18,18 @@
                 <div class="hero-summary text-center">
                     <div class="row">
                         <div class="item col-4">
-                            <div class="summary-desc mb-1"><i class="icon fas fa-video mr-2"></i>Content</div>
-                            <h4 class="summary-heading">80+ <span class="desc">Videos</span></h4>
+                            <div class="summary-desc mb-1"><i class="icon far fa-star mr-2"></i>Rating</div>
+                            <h4 class="summary-heading" id="rating"></h4>
                             
                         </div><!--//col-->
                         <div class="item col-4">
-                            <div class="summary-desc mb-1"><i class="icon fas fa-clock mr-2"></i>Duration</div>
-                            <h4 class="summary-heading">72 <span class="desc">Hours</span></h4>
+                            <div class="summary-desc mb-1"><i class="icon far fa-user mr-2"></i>Students</div>
+                            <h4 class="summary-heading"><%= course.buyers %></h4>
                             
                         </div><!--//col-->
                         <div class="item col-4">
-                            <div class="summary-desc mb-1"><i class="icon fas fa-user-circle mr-2"></i>Access</div>
-                            <h4 class="summary-heading">Lifetime</h4>
+                            <div class="summary-desc mb-1"><i class="icon fas fa-exclamation mr-2"></i>Last updated</div>
+                            <h4 class="summary-heading"><%= lastUpdatedDate %></h4>
                             
                         </div><!--//col-->
                     </div><!--//row-->
@@ -65,16 +65,17 @@
                     <div class="plan-item rounded" style="position: absolute; width: 395px; height: 841; right: -200%;">
                         <div class="plan-header">
                             <img src="/images/hero-bg.jpg">
-                            <h4 class="plan-heading p-3 theme-bg-primary">Course Title</h4>
+                            <h4 class="plan-heading p-3 theme-bg-primary"><%= course.title %></h4>
                         </div><!--//plan-header-->
                         
                         <div class="plan-details p-4">
+                            <div class="best-seller mb-3">Bestseller</div>
                             <div class="plan-desc text-left mb-4 row">
-                                <div class="plan-price col-3">$99</div>
+                                <div class="plan-price col-4 mr-2"><%= course.price %></div>
                                 <div class="plan-original-price col-2">$1500</div>
                                 <div class="plan-sale-off col-4">82% off</div>
-                                <div class="px-2" style="color: #ff6666;"><i class="fas fa-stopwatch px-2"></i><strong>8 hours</strong> left at this price!</div>
                             </div>
+                            <div style="color: #ff6666;"><i class="fas fa-stopwatch px-2"></i><strong>8 hours</strong> left at this price!</div>
                             <div class="plan-buttons my-lg-4">
                                 <a class="btn btn-primary btn-block">Add to cart</a>
                                 <a class="btn btn-primary btn-block" id="btn-buy-now">Buy now</a>
@@ -111,14 +112,11 @@
             <div class="container">
                 <div class="section-col-max mx-auto">
                     <h3 class="section-title mb-4">What You Will Learn</h3>
-                    <div class="text-center mb-3">
+                    <div class="mb-3">
                         <ul class="column-list list-unstyled mx-auto d-inline-block">
-                            <li><i class="theme-check-icon fas fa-check mr-2"></i>Course highlight lorem ipsum</li>
-                            <li><i class="theme-check-icon fas fa-check mr-2"></i>Course highlight  lorem ipsum</li>
-                            <li><i class="theme-check-icon fas fa-check mr-2"></i>Course highlight  lorem ipsum</li>
-                            <li><i class="theme-check-icon fas fa-check mr-2"></i>Course highlight  lorem ipsum</li>
-                            <li><i class="theme-check-icon fas fa-check mr-2"></i>Course highlight  lorem ipsum</li>
-                            <li><i class="theme-check-icon fas fa-check mr-2"></i>Course highlight  lorem ipsum</li>
+                            <% course.mainContents.map(content => { %>
+                                <li><i class="theme-check-icon fas fa-check mr-2"></i><%= content %></li>
+                            <% }) %> 
                         </ul>
                     </div><!--//text-center-->
                 </div><!--//section-col-max-->
@@ -530,7 +528,9 @@
                 <div class="section-col-max mx-auto">
                     <h3 class="section-title mb-4">Requirements</h3>
                     <ul>
-                        
+                        <% course.requirements.map(requirement => { %>
+                            <li><%= requirement %></li>
+                        <% }) %>
                     </ul>
                 </div>
             </div><!--//container-->
@@ -540,7 +540,7 @@
             <div class="container py-5">
                 <div class="section-col-max mx-auto">
                     <h3 class="section-title mb-4">Description</h3>
-                    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora qui natus illum recusandae, aperiam eos nihil cupiditate totam culpa perferendis dolores iusto dolorem debitis repudiandae alias reiciendis quisquam consequuntur saepe, corrupti eaque aliquid provident dicta dolore amet. Obcaecati soluta reprehenderit velit earum, perferendis culpa quae iure, dolore deserunt architecto dicta!</p>
                 </div>
             </div><!--//container-->
         </div>
@@ -681,3 +681,7 @@
         </div><!--//modal-content-->
     </div><!--//modal-dialog-->
 </div><!--//modal-->
+
+<script type="text/javascript">
+    var course = <%- JSON.stringify(course) %>
+</script>

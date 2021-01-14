@@ -1,0 +1,86 @@
+<div id="course-basics" class="mx-auto">
+    <form>
+        <div class="form-group">
+            <label for="course-title">Course title</label>
+            <div class="input-group" id="course-title">
+                <input type="text" class="form-control" name="courseTitle" id="courseTitle" placeholder="Insert your course title" value="<%= course.title %>">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="title-characters">60</div>
+                </div>
+            </div>
+            <label for="course-subtitle">Course subtitle</label>
+            <div class="input-group" id="course-subtitle">
+                <input type="text" class="form-control" name="courseSubtitle" id="courseSubtitle" placeholder="Insert your course subtitle" value="<%= course.subTitle %>">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="subtitle-characters">120</div>
+                </div>
+            </div>
+            <label for="course-description">Course description</label>
+            <textarea name="courseDescription" id="course-description" placeholder="Insert your course description"></textarea>
+            <label for="course-basic-info">Basic info</label>
+            <div class="d-flex">
+                <select class="form-control w-25 mr-4" id="course-basic-info">
+                    <option><%= course.category %></option>
+                    <% if (course.category === 'Web Development') { %>
+                        <option>Mobile Development</option>
+                    <% } else { %>
+                        <option>Web Development</option>
+                    <% } %>
+                </select>
+
+                <select class="form-control w-25" id="course-basic-info">
+                    <% if (course.subcategory === '') { %>
+                        <option>-- Select Subcategory --</option>
+                    <% } else { %>
+                        <option><%= course.subcategory %></option>
+                    <% } %>
+                    <% if (course.category === 'Web Development') { %>
+                        <option>Javascript</option>
+                        <option>React</option>
+                        <option>CSS</option>
+                        <option>Angular</option>
+                    <% } else { %>
+                        <option>Swift</option>
+                        <option>React Native</option>
+                        <option>Kotlin</option>
+                    <% } %>
+                </select>
+            </div>
+        </div>
+    </form>
+    <label for="course-image">Course image</label>
+    <div class="row" id="course-image">
+        <img src="/images/course_placeholder.png" class="col-6">
+        <div class="col-6">
+            Upload your course image here. Important guidelines: 1600x678 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.
+            <div class="custom-file my-4">
+                <input type="file" class="custom-file-input" id="courseImage" required>
+                <label class="custom-file-label" for="courseImage">Choose file...</label>
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+    </div>
+    <label for="course-promotional-video">Promotional video</label>
+    <div class="row" id="course-promotional-video">
+        <img src="/images/course_placeholder.png" class="col-6">
+        <div class="col-6">
+            Students who watch a well-made promo video are <strong>5X more likely to enroll</strong> in your course. We've seen that statistic go up to 10X for exceptionally awesome videos.            <div class="custom-file my-4">
+            <input type="file" class="custom-file-input" id="coursePromotionalVideo" required>
+            <label class="custom-file-label" for="coursePromotionalVideo">Choose file...</label>
+            <div class="invalid-feedback"></div>
+        </div>
+    </div>
+    </div>
+    <label for="course-instructors">Instructor profile(s)</label>
+    <div id="course-instructors" class="my-2">
+        <div class="instructors">
+            <div class="instructor d-flex align-items-center">
+                <img src="/images/default_avatar.png">
+                <%= user.name %>
+            </div>
+            <button type="button" class="btn btn-outline-warning btn-lg my-4">Add instructor</button>        
+        </div>
+    </div>
+</div>
+
+    

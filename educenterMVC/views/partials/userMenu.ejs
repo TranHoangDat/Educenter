@@ -11,7 +11,11 @@
             <a href="/my-courses/learning"><li>My learning</li></a>
             <a href="/my-courses/wishlist"><li>Wishlist</li></a>
             <a href="#"><li>My cart</li></a>
-            <a href="#"><li>Teach on Educenter</li></a>
+            <% if (user.role === 'student') { %>
+                <a href="#"><li>Teach on Educenter</li></a> 
+            <% } else { %>
+                <a href="/instructor/course"><li>Instructor Dashboard</li></a>
+            <% } %>
             <a href="#"><li>Help</li></a>
             <a href="/users/logout"><li>Log out</li></a>
         </ul>

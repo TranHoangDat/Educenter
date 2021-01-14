@@ -29,18 +29,15 @@
           </div>
           <form id="newCourseForm">
             <div class="form-group">
-              <label for="courseTitle">Title</label>
-              <input
-                type="text"
-                id="courseTitle"
-                name="courseTitle"
-                class="form-control"
-                placeholder="Enter Course's Title"
-                value="<%= typeof name != 'undefined' ? name : '' %>"
-                style="height: 45px; margin-bottom: 15px;"
-              />
-              <label for="courseCategory" style="display: inline-block;">Category</label>
-              <select id="courseCategory" name="courseCategory" class="form-control w-50" style="height: 45px;">
+              <label for="course-title">Course title</label>
+              <div class="input-group" id="course-title">
+                  <input style="height: 45px;" type="text" class="form-control" name="courseTitle" id="courseTitle" placeholder="e.g. Learn Javascript from Scratch">
+                  <div class="input-group-append">
+                      <div class="input-group-text" id="title-characters">60</div>
+                  </div>
+              </div>
+              <label for="course-category" style="display: inline-block; margin-top: 15px;">Category</label>
+              <select id="course-category" name="courseCategory" class="form-control w-50" style="height: 45px;">
                 <option>-- Select a Category --</option>
                 <option>Web Development</option>
                 <option>Mobile Development</option>

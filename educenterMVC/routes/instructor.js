@@ -7,11 +7,11 @@ router.get('/course', instructorAuth, instructorController.renderCourses);
 
 router.get('/course/:courseId', manageCourseAuth, (req, res) => res.redirect(`/instructor/course/${req.params.courseId}/manage/basics`));
 
-// router.get('/course/:courseId', (req, res) => res.redirect(`/instructor/course/${req.params.courseId}/manage/basics`));
+router.get('/course/:courseId/manage/basics', manageCourseAuth, instructorController.renderCourseBasics);
 
-router.get('/course/:courseId/manage/basics', manageCourseAuth, instructorController.renderCourseLP);
+router.get('/course/:courseId/manage/goals', manageCourseAuth, instructorController.renderCourseGoals);
 
-// router.get('/course/:courseId/manage/basics', instructorController.renderCourseLP);
+router.get('/course/:courseId/manage/curriculum', manageCourseAuth, instructorController.renderCourseCurriculum);
 
 router.post('/course/newCourse', instructorController.addCourse);
 

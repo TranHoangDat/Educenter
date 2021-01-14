@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <title><%= `${courseTitle} | Educenter` %></title>
+    
+        <!-- mobile responsive meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <!-- ** Plugins Needed for the Project ** -->
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+            
+        <!--Favicon-->
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+        <link href="/css/mPage.css" rel="stylesheet">
+        <% if (contentTitle === 'Course landing page') { %>
+            <link href="/css/mCourseBasics.css" rel="stylesheet">
+        <% } else if (contentTitle === 'Target your students') { %>
+            <link href="/css/mCourseGoals.css" rel="stylesheet">
+        <% } else if (contentTitle === 'Curriculum') { %>
+            <link href="/css/mCourseCurriculum.css" rel="stylesheet">
+        <% } %>
+        
+        <!-- TinyMCE -->
+        <script src="https://cdn.tiny.cloud/1/m1pzm1fuw1ilremgnd231553lnlm9kgztdi6yfqmmck1n8r8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector:'textarea#course-description',
+                resize: false,
+                plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+                toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+                toolbar_mode: 'floating',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'TranHoangDat',});
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light d-flex px-3">
+                <a class="navbar-brand" href="/instructor/course"><i class="fas fa-chevron-left"></i>Back to Courses</a>
+                <h4 class="pt-2 mr-3"><%= courseTitle %></h4>
+                <h6 class="pt-2 mr-3"><%= courseStatus.toUpperCase() %></h6>
+                <h6 class="pt-2">0min of video content uploaded</h6>
+                <div class="d-flex ml-auto align-items-center">
+                    <div id="btnSave" class="btn mx-3">
+                        Save
+                    </div>
+                    <div>
+                        <i class="fas fa-cog pt-1 px-3" style="color: white; font-size: 24px; cursor: pointer;"></i>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="menu">
+                <div class="menu-section">
+                    <p class="section-title">Plan your course</p>
+                    <div class="section-selections">
+                        <div id="target-your-students" class="radio-container">
+                            <a href="/instructor/course/<%= courseId %>/manage/goals">Target your students</a>
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                        <div id="course-structure" class="radio-container">
+                            Course structure
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                        <div id="setup-test-video" class="radio-container">
+                            Setup & test video
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <p class="section-title">Create your content</p>
+                    <div class="section-selections">
+                        <div id="film-edit" class="radio-container">
+                            Film & edit
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                        <div id="curriculum" class="radio-container">
+                            <a href="/instructor/course/<%= courseId %>/manage/curriculum">Curriculum</a>
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                        <div id="captions" class="radio-container">
+                            Captions (optional)
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <p class="section-title">Publish your course</p>
+                    <div class="section-selections">
+                        <div id="course-landing-page" class="radio-container">
+                            <a href="/instructor/course/<%= courseId %>/manage/basics">Course landing page</a>
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                        <div id="pricing" class="radio-container ">
+                            <a href="/instructor/course/<%= courseId %>/manage/pricing">Pricing</a>
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div> 
+                        <div id="promotions" class="radio-container">
+                            Promotions
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div>   
+                        <div id="course-messages" class="radio-container">
+                            <a href="/instructor/course/<%= courseId %>/manage/communications/messages">Course messages</a>
+                            <input type="radio" class="">
+                            <span class="circle"></span>
+                        </div>   
+                    </div>
+                </div>
+                <button id="btnSubmit" type="submit" class="btn btn-block">
+                    Submit for Review
+                </button>
+            </section>
+            <section class="main-content">
+                <div class="title">
+                    <p><%= contentTitle %></p>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="content">
+                    <%- body %>
+                </div>
+            </section>
+        </main>
+
+        <!-- jQuery -->
+        <script src="/plugins/jQuery/jquery.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="/plugins/bootstrap/bootstrap.min.js"></script>
+        <script src="/js/jquery-2.1.1.js"></script>
+        <script type="text/javascript">
+            var contentId = <%- JSON.stringify(contentId) %>
+        </script>
+        <script src="/js/mPage.js"></script>
+        <% if (contentTitle === 'Course landing page') { %>
+            <script src="/js/mCourseBasics.js"></script>
+        <% } %>
+    </body>
+</html>

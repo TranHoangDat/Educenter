@@ -52,11 +52,10 @@ module.exports = {
             expiresIn: '1d'
           }, 
           (err, emailToken) => {
-            console.log(emailToken);
             const url = `http://localhost:5000/users/confirmation/${emailToken}`;
             req.transporter.sendMail({
               from: "Educenter",
-              to: newUser.email,
+              to: newEmail,
               subject: 'Educenter Confimation Email',
               html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
             });

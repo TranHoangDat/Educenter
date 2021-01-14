@@ -31,9 +31,10 @@ module.exports = {
 
         if (req.user.role === 'instructor') {
           let isInstructorOfCourse = null;
+          let course = null;
 
           try {
-            const course = await CoursePrototype.findOne({
+            course = await CoursePrototype.findOne({
               _id: req.params.courseId,
             });
 
@@ -48,6 +49,9 @@ module.exports = {
           }
           
           if (isInstructorOfCourse) {
+            req.courseTitle = course.title;
+            req.courseStatus = course.status;
+            req.courseId = course._id;
             return next();
           } else {
             return res.redirect('/'); //
