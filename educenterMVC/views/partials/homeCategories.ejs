@@ -1,39 +1,22 @@
-<div class="cd-dropdown-wrapper" id="categories">
-    <a class="cd-dropdown-trigger" href="#0">Categories</a>
-    <nav class="cd-dropdown">
-      <h2>Title</h2>
-      <a href="#0" class="cd-close">Close</a>
-      <ul class="cd-dropdown-content">
-        <li class="has-children">
-          <a href="#">Development</a>
-          <ul class="cd-secondary-dropdown is-hidden">
-            <li class="go-back"><a href="#0">Menu</a></li>
-            <li class="see-all"><a href="#">All Development</a></li>
-            <li class="has-children">
-              <a href="#">Web Development</a>
-
-              <ul class="is-hidden">
-                <li class="see-all"><a href="#">All Web Development</a></li>
-                <li><a href="#">Javascript</a></li>
-                <li><a href="#">React</a></li>
-                <li><a href="#">CSS</a></li>
-                <li><a href="#">Angular</a></li>
-              </ul>
-            </li>
-
-            <li class="has-children">
-              <a href="#">Mobile Development</a>
-
-              <ul class="is-hidden">
-                <li class="see-all"><a href="#">All Mobile Development</a></li>
-                <li><a href="#">Swift</a></li>
-                <li><a href="#0">React Native</a></li>
-                <li><a href="#0">Kotlin</a></li>
-              </ul>
-            </li>
-
-          </ul> <!-- .cd-secondary-dropdown -->
-        </li> <!-- .has-children -->
-      </ul> <!-- .cd-dropdown-content -->
-    </nav> <!-- .cd-dropdown -->
-  </div> <!-- .cd-dropdown-wrapper -->
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Categories
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Web Development</a>
+      <ul class="dropdown-menu">
+        <a class="dropdown-item" href="#">Javascript</a></li>
+        <a class="dropdown-item" href="#">React</a>
+        <a class="dropdown-item" href="#">CSS</a>
+        <a class="dropdown-item" href="#">Angular</a>
+      </ul>
+    </li>
+    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Mobile Development</a>
+      <ul class="dropdown-menu">
+        <a class="dropdown-item" href="#">Swift</a>
+        <a class="dropdown-item" href="#">React Native</a>
+        <a class="dropdown-item" href="#">Kotlin</a>
+      </ul>
+    </li>  
+  </ul>
+</div>

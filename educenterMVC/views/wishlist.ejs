@@ -1,0 +1,36 @@
+<header class="header">
+    <% include ./partials/homeTopHeader %>
+</header>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex align-items-center section-title justify-content-between">
+        <h2 class="mb-0 text-nowrap mr-3">My learning</h2>
+        <div class="border-top w-100 border-primary d-none d-sm-block"></div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs mb-4" id="course-nav" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" id="all-courses-tab" data-toggle="tab" href="#all-courses" role="tab" aria-controls="all-courses" aria-selected="true">All courses</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="wishlist-tab" data-toggle="tab" href="#wishlist" role="tab" aria-controls="wishlist" aria-selected="false">Wishlist</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show" id="all-courses" role="tabpanel" aria-labelledby="all-courses-tab">
+      <div class="row"></div>
+    </div>
+
+    <div class="tab-pane fade" id="wishlist" role="tabpanel" aria-labelledby="wishlist-tab">
+      <div class="row"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var wishlist, allCourses;
+  wishlist = <%- JSON.stringify(wishlist) %>;
+  allCourses = <%- JSON.stringify(allCourses) %>;
+</script>

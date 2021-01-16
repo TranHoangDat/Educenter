@@ -5,14 +5,11 @@ const StudentCourseSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  idWishlist: {
-    type: [String],
-  },
-  idLearning: {
+  idCourse: {
     type: [String]
   }
 });
 
-const StudentCourse = mongoose.model('StudentLearning', StudentCourseSchema);
+const StudentCourse = mongoose.model('StudentCourse', StudentCourseSchema);
 
 module.exports = StudentCourse;

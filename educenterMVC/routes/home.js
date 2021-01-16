@@ -6,7 +6,6 @@ const { ensureAuthenticated } = require('../config/auth.js');
 // Student
 router.get('/my-courses/wishlist', ensureAuthenticated, homeController.renderWishlist);
 router.get('/my-courses/learning', ensureAuthenticated, homeController.renderLearning);
-router.post('/my-courses/wishlist/remove', homeController.removeWishlist);
 
 // Instructor
 

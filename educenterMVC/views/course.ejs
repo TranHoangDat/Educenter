@@ -4,23 +4,44 @@
         </div><!--//hero-mask-->
         <div class="container course-container py-5">
             <div class="mx-auto">
-                <div class="hero-heading pt-3 mb-3"><%= course.title %></div>
+                <div class="chain-links">
+                    <a href="#"><%= course.category %></a>
+                    <span> ></span>
+                    <a href="#"><%= course.subCategory %></a>
+                </div>
+                <div class="hero-heading pt-3 mb-2"><%= course.title %></div>
                 <h1 class="hero-heading mb-5">
                     <span class="hero-heading-upper desc d-block px-1"><%= course.subTitle %></span>
+                    <div class="instructors mt-3 px-1">
+                        Created by
+                        <% for(let i = 0; i < course.instructors.length; i++) { %>
+                            <a href="#"><%= course.instructors[i].name %></a>
+                            <% if (i < (course.instructors.length - 1)) { %>
+                                <span>, </span>
+                            <% } %>
+                        <% } %>
+                    </div>
                 </h1>
                 <div class="text-center mb-5">
                     <a href="/" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Back To Home"><i class="fas fa-home"></i></a>
-                    <a href="#" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Watch Preview"><i class="far fa-eye"></i></a>
-                    <a href="#" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><i class="far fa-heart"></i></a>
-                    <a href="#" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Add to Shopping Cart"><i class="fas fa-shopping-cart"></i></a>
+                    <button id="btn-wish-list" class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+                        <div>
+                            <% if (isWishedCourse) { %>
+                                <i class="fas fa-heart active"></i>
+                            <% } else { %>
+                                <i class="fas fa-heart"></i>
+                            <% } %>
+                        </div>
+                    </button>
+                    <button class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Add to Shopping Cart"><i class="fas fa-shopping-cart"></i></button>
+                    <button class="btn btn-primary btn-circle" data-toggle="tooltip" data-placement="top" title="Watch Preview"><i class="far fa-eye"></i></button>
                 </div>
                 
                 <div class="hero-summary text-center">
                     <div class="row">
                         <div class="item col-4">
                             <div class="summary-desc mb-1"><i class="icon far fa-star mr-2"></i>Rating</div>
-                            <h4 class="summary-heading" id="rating"></h4>
-                            
+                            <h4 class="summary-heading" id="rating"><%= rating %></h4>
                         </div><!--//col-->
                         <div class="item col-4">
                             <div class="summary-desc mb-1"><i class="icon far fa-user mr-2"></i>Students</div>
@@ -69,7 +90,9 @@
                         </div><!--//plan-header-->
                         
                         <div class="plan-details p-4">
-                            <div class="best-seller mb-3">Bestseller</div>
+                            <% if (isBestseller) { %>
+                                <div class="best-seller mb-3">Bestseller</div>
+                            <% } %>
                             <div class="plan-desc text-left mb-4 row">
                                 <div class="plan-price col-4 mr-2"><%= course.price %></div>
                                 <div class="plan-original-price col-2">$1500</div>
@@ -77,8 +100,8 @@
                             </div>
                             <div style="color: #ff6666;"><i class="fas fa-stopwatch px-2"></i><strong>8 hours</strong> left at this price!</div>
                             <div class="plan-buttons my-lg-4">
-                                <a class="btn btn-primary btn-block">Add to cart</a>
-                                <a class="btn btn-primary btn-block" id="btn-buy-now">Buy now</a>
+                                <span class="btn btn-primary btn-block">Add to cart</span>
+                                <span class="btn btn-primary btn-block" id="btn-buy-now">Buy now</span>
                                 <p class="text-center my-3">30-Day Money-Back Guarantee</p>
                             </div>
                             <div class="plan-content px-1">
@@ -552,7 +575,6 @@
                     <div class="row">
                         <div class="col-12 col-lg-2">
                             <div class="tutor-img-holder mb-5 mb-lg-0 text-center">
-                                <img class="tutor-profile img-fluid rounded" src="assets/images/tutor.jpg" alt="">
                             </div><!--//tutor-img-holder-->
                         </div><!--//col-->
                         <div class="col-12 col-lg-10">
@@ -603,7 +625,6 @@
                     <div class="col-12 col-lg-4 mb-4 mb-lg-0">
                         <div class="item">
                             <div class="item-thumb">
-                                <img class="img-fluid rounded-top" src="assets/images/course-1.jpg" alt="">
                             </div><!--//thumb-holder-->
                             <div class="item-desc p-4 rounded-bottom">
                                 <h4 class="title mb-3"><a href="#">Course Title Lorem Ipsum</a></h4>
@@ -618,7 +639,6 @@
                     <div class="col-12 col-lg-4 mb-4 mb-lg-0">
                         <div class="item">
                             <div class="item-thumb">
-                                <img class="img-fluid rounded-top" src="assets/images/course-2.jpg" alt="">
                             </div><!--//thumb-holder-->
                             <div class="item-desc p-4 rounded-bottom">
                                 <h4 class="title mb-3"><a href="#">Course Title Lorem Ipsum</a></h4>
@@ -633,7 +653,6 @@
                     <div class="col-12 col-lg-4">
                         <div class="item">
                             <div class="item-thumb">
-                                <img class="img-fluid rounded-top" src="assets/images/course-3.jpg" alt="">
                             </div><!--//thumb-holder-->
                             <div class="item-desc p-4 rounded-bottom">
                                 <h4 class="title mb-3"><a href="#">Course Title Lorem Ipsum</a></h4>
@@ -682,6 +701,9 @@
     </div><!--//modal-dialog-->
 </div><!--//modal-->
 
-<script type="text/javascript">
-    var course = <%- JSON.stringify(course) %>
+<script>
+    var user, course, isWishedCourse;
+    course = <%- JSON.stringify(course) %>;
+    userId = `<%- JSON.stringify(userId) %>`;
+    isWishedCourse = <%- JSON.stringify(isWishedCourse) %>;
 </script>

@@ -3,6 +3,7 @@ const StudentCourse = require('../models/StudentCourse.js');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const StudentWishlist = require('../models/StudentWishlist');
 require('dotenv').config();
 
 module.exports = { 
@@ -29,7 +30,8 @@ module.exports = {
         email,
         password,
         password2,
-        layout: 'layouts/usersLayout'
+        layout: 'layouts/usersLayout',
+        title: 'Educenter Register'
       });
     } else {
         User.findOne({ email: email }).then(user => {
@@ -41,7 +43,8 @@ module.exports = {
             email,
             password,
             password2,
-            layout: 'layouts/usersLayout'
+            layout: 'layouts/usersLayout',
+            title: 'Educenter Register'
           });
         } else {
           const newUser = new User({
@@ -74,6 +77,11 @@ module.exports = {
                   })
                 },
               );
+                const newStudentWishlist = new StudentWishlist({
+                  idStudent: newUser._id,
+                  idCourse: []
+                });
+                newStudentWishlist.save();
                 req.flash(
                   'success_msg',
                   'You are now registered and can log in'
@@ -96,8 +104,7 @@ module.exports = {
       );
       const newStudentCourse = new StudentCourse({
         idStudent: tokenInfo.id,
-        idWishlist: [],
-        idLearning: []
+        idCourse: []
       });
       newStudentCourse.save();
       return res.redirect('/');

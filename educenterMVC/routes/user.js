@@ -16,4 +16,8 @@ router.post('/edit-account/email', (req, res, next) => { req.transporter = maile
 router.post('/edit-account/name', userController.editName);
 router.post('/edit-account/password', userController.editPassword);
 
+// Edit course
+router.post('/add-wishlist/:courseId', userController.addWishlist);
+router.post('/remove-wishlist/:courseId', userController.removeWishlist);
+
 module.exports = router;

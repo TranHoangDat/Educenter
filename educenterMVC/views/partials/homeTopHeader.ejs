@@ -1,0 +1,30 @@
+<div class="top-header py-2 bg-white">
+    <div class="container">
+      <div class="row no-gutters">
+        <div class="col-lg-2 mr-3 d-flex align-items-centern">
+          <% include ./homeCategories %>
+        </div>
+        <div class="col-lg-9 text-center text-lg-right d-flex align-items-center justify-content-between">
+          <!-- Search box -->
+          <form id="search-form" role="search">
+            <button>
+              <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
+            </button>
+            <input type="search" id="query" name="q"
+              placeholder="Search..."
+              aria-label="Search within site content">
+          </form>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 mx-3 d-inline-block"><i class="fas fa-shopping-cart"></i></a></li>
+            <% if (!user) { %>
+              <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="/users/login">login</a></li>
+              <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="/users/register">register</a></li>
+            <% } %>
+          </ul>
+          <% if (user) { %>
+            <%- include('partials/userMenu', {user:user}); %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+</div>

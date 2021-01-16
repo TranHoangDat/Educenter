@@ -13,7 +13,7 @@ const CourseInfoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  subcategory: {
+  subCategory: {
     type: String,
     default: ''
   },
