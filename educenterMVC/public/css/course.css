@@ -1,3 +1,17 @@
+.chain-links {
+    font-size: 18px;
+}
+
+.chain-links a {
+    font-weight: bold;
+    color: #668cff;
+}
+
+.chain-links a:hover {
+    color: #668cff;
+    text-decoration: none;
+}
+
 .btn-circle {
     width: 55px;
     height: 55px;
@@ -5,6 +19,11 @@
     padding: 0;
     border-radius: 50% !important;
     margin: 0px 20px;
+}
+
+.btn-circle i {
+    display: inline-block;
+    padding-top: 20px;
 }
 
 .sticky {
@@ -46,4 +65,72 @@
     text-align: center;
     border-radius: 3px;
     color: #333;
+}
+
+#btn-wish-list.loading {
+    cursor: not-allowed;
+}
+
+#btn-wish-list i.loading {
+    visibility: hidden;
+}
+
+#btn-wish-list i.active {
+    visibility: visible;
+    color: #ff4d4d;
+}
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  margin-left: 13px;
+}
+.loader {
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-left: 1.1em solid #ffffff;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.instructors {
+  font-size: 18px;
+}
+
+.instructors a {
+  color: #668cff;
+  font-weight: 400;
+}
+
+.instructors a:hover {
+  text-decoration: none;
 }

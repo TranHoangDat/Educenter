@@ -199,10 +199,47 @@ $(document).ready(function() {
 		$listItem.siblings().removeClass('active');
 		
 		e.preventDefault();
-		
-		
 	});
 
-	let ratingPoint = course.rating / course.voters;
-	$('#rating').append(`${ratingPoint.toFixed(2)} (${course.voters})`);
+	$('#btn-wish-list').click(function() {
+		if ($('#btn-wish-list').hasClass('loading')) {
+			return;
+		}
+		
+		if (userId) {
+			$('#btn-wish-list').addClass('loading');
+			$('#btn-wish-list').find('.fa-heart').addClass('loading');
+			$('#btn-wish-list').find('div').toggleClass('loader');
+
+			if (!isWishedCourse) {
+				$.ajax({
+					type: 'post',
+					url: `/user/add-wishlist/${course.idCourse}`,
+				}).done(function(msg) {
+					if (msg === 'success') {
+						$('#btn-wish-list').removeClass('loading');
+						$('#btn-wish-list').find('.fa-heart').removeClass('loading');
+						$('#btn-wish-list').find('div').toggleClass('loader');
+						$('#btn-wish-list').find('.fa-heart').addClass('active');
+						isWishedCourse = true;
+					}
+				});
+			} else {
+				$.ajax({
+					type: 'post',
+					url: `/user/remove-wishlist/${course.idCourse}`,
+				}).done(function(msg) {
+					if (msg === 'success') {
+						$('#btn-wish-list').removeClass('loading');
+						$('#btn-wish-list').find('.fa-heart').removeClass('loading');
+						$('#btn-wish-list').find('div').toggleClass('loader');
+						$('#btn-wish-list').find('.fa-heart').removeClass('active');
+					}
+				});
+			}
+
+		} else {
+			window.location.href = 'http://localhost:5000/users/register';
+		}
+	});
 });

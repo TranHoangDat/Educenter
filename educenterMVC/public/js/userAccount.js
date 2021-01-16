@@ -103,7 +103,6 @@ $('#btn-edit-email').on('click', function(e) {
     $.ajax({
         url: '/user/edit-account/email',
         data: {
-            oldEmail: currentEmail,
             newEmail,
             password
         },
@@ -146,11 +145,9 @@ $('#btn-edit-password').on('click', function(e) {
         return;
     }
 
-    const userEmail = $('#user-email').text();
     $.ajax({
         url: '/user/edit-account/password',
         data: { 
-            email: userEmail,
             oldPassword: currentPassword,
             newPassword: newPassword
         },
